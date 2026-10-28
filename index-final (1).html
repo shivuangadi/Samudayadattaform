@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="kn"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ಸಮುದಾಯದತ್ತ ಶಾಲೆ - ಮಾಹಿತಿ ನಮೂನೆ</title>
+<style>
+:root{--ink:#111;--line:#555;--shade:#f1f1f1}
+*{box-sizing:border-box}
+body{margin:0;background:#e8ebef;color:var(--ink);font-family:"Noto Sans Kannada","Nirmala UI","Tunga",Arial,sans-serif}
+.toolbar{max-width:210mm;margin:12px auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button{border:1px solid #555;border-radius:5px;padding:8px 12px;background:#fff;cursor:pointer;font-size:14px}
+button.primary{background:#183b56;color:#fff;border-color:#183b56}
+.note{font-size:12px;color:#333}
+.paper{width:210mm;height:297mm;min-height:297mm;margin:0 auto 12px;background:#fff;padding:8mm 10mm;box-shadow:0 2px 12px #0002;display:flex;flex-direction:column}
+#page1 table:last-child{margin-bottom:0}
+#page2 .signature{margin-top:20mm;padding-top:0;break-inside:avoid;page-break-inside:avoid;flex-shrink:0}
+.page-count{margin-left:auto}
+h1,h2,p{margin:0}
+.heading{text-align:center;font-weight:bold;line-height:1.35;margin-bottom:2mm}
+.heading .main{font-size:14pt;text-decoration:underline}
+.heading .sub{font-size:12pt}
+.heading .dates{font-size:10pt;margin-top:1mm}
+table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:var(--form-font-size, 8.3pt);line-height:1.15}
+td,th{border:0.6px solid var(--line);padding:2px 3px;vertical-align:middle;overflow-wrap:anywhere}
+th{font-weight:bold;text-align:center;background:#f8f8f8}
+td[contenteditable="true"],th[contenteditable="true"],h1[contenteditable="true"],p[contenteditable="true"],span[contenteditable="true"]{outline:none}
+td[contenteditable="true"]:focus,th[contenteditable="true"]:focus,[contenteditable="true"]:focus{background:#fffde8;box-shadow:inset 0 0 0 1px #9c8c28}
+.num{width:10mm;text-align:center;font-weight:bold}
+.prompt{width:76mm}
+.answer{width:auto;min-height:7mm}
+.section{font-weight:bold;text-align:center;background:#f4f4f4}
+.small{font-size:7.7pt}
+.compact td,.compact th{padding:1.5px 2px}
+.students td{height:5.6mm;text-align:center}
+.signature{display:flex;justify-content:space-between;margin-top:9mm;font-size:9pt}
+.page2{break-before:page;page-break-before:always}
+[contenteditable="true"]{cursor:text}
+/* Strict 1 cm serial-number column */
+table > colgroup > col:first-child{width:10mm!important}
+td.num, th.num, td:first-child.num, .sub-num{width:10mm!important;min-width:10mm!important;max-width:10mm!important;text-align:center!important}
+
+input,select{font:inherit}
+@page{size:A4 portrait;margin:0}
+:root{--form-font-size:8.3pt}
+@media print{table{font-size:var(--form-font-size, 8.3pt)!important}}
+@media print{
+ body{background:#fff}
+ .toolbar{display:none!important}
+ .paper{width:210mm;height:297mm;min-height:0;margin:0;padding:7mm 9mm;box-shadow:none;overflow:visible;display:flex;flex-direction:column;break-after:page;page-break-after:always}
+ .paper:last-of-type{break-after:auto;page-break-after:auto}
+ table{font-size:var(--form-font-size, 8.3pt)!important;line-height:1.02}
+ td,th{padding:1px 1.5px}
+ .heading .main{font-size:12pt}.heading .sub{font-size:10pt}.heading .dates{font-size:8.5pt}
+ .students td{height:4.2mm}
+ #page1{gap:0}
+ #page1 > table{flex:0 0 auto}
+ #page2 > table{flex:0 0 auto}
+ .signature{margin-top:20mm!important;padding-top:0!important;font-size:8pt;break-inside:avoid;page-break-inside:avoid;flex-shrink:0}
+}
+
+/* Match main serial and sub-serial columns exactly like the source PDF */
+table{table-layout:fixed}
+td.num, td.sub-num, th.num{box-sizing:border-box;width:10mm!important;min-width:10mm!important;max-width:10mm!important;padding-left:0!important;padding-right:0!important;text-align:center!important;}
+
+/* Final column structure: serial numbers in column 1 (1 cm); all labels/questions left aligned in column 2 */
+table{table-layout:fixed;width:100%}
+table tr > td.num, table tr > th.num, table tr > td.sub-num {
+  width:10mm!important; min-width:10mm!important; max-width:10mm!important;
+  text-align:center!important; padding-left:0!important; padding-right:0!important;
+}
+table tr > td:nth-child(2):not([colspan]), table tr > th:nth-child(2):not([colspan]) {
+  text-align:left!important;
+}
+
+/* Sections 6–12: preserve the PDF's three-column question layout */
+#page1 > table:last-child, #page2 > table { table-layout:fixed; width:100%; }
+#page1 > table:last-child colgroup col:first-child, #page2 > table colgroup col:first-child { width:10mm!important; }
+#page1 > table:last-child tr > td.num, #page1 > table:last-child tr > td.sub-num,
+#page2 > table tr > td.num, #page2 > table tr > td.sub-num {
+ width:10mm!important; min-width:10mm!important; max-width:10mm!important;
+ text-align:center!important; padding-left:0!important; padding-right:0!important;
+}
+#page1 > table:last-child tr > td:nth-child(2):not([colspan]),
+#page2 > table tr > td:nth-child(2):not([colspan]) { text-align:left!important; }
+
+/* Fit the first page content to A4 height; keep the original form's row structure */
+@media print{
+ #page1{justify-content:flex-start}
+ #page1 .heading{flex:0 0 auto}
+ #page1 > table{width:100%}
+ #page1 > table:last-child tr:not(:first-child) td{padding-top:2px;padding-bottom:2px}
+ #studentRows td{height:5mm}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+<button class="primary" type="button" onclick="window.print()">Print / Save as PDF</button>
+<label class="note" for="fontSizeControl">Font size</label>
+<input id="fontSizeControl" type="range" min="7" max="16" step="0.5" value="8.3" oninput="setFormFontSize(this.value)">
+<span id="fontSizeValue" class="note">8.3 pt</span>
+<button type="button" onclick="downloadHTML()">Download editable HTML</button>
+</div>
+
+
+
+<section class="paper" id="page1">
+<div class="heading">
+<div class="main" contenteditable="true">ಕ್ಷೇತ್ರ ಶಿಕ್ಷಣಾಧಿಕಾರಿಗಳು ಹಾಗೂ ಕ್ಷೇತ್ರ ಸಮನ್ವಯಾಧಿಕಾರಿಗಳ ಕಚೇರಿ ಬೆಳಗಾವಿ ಗ್ರಾಮೀಣ.</div>
+<div class="sub" contenteditable="true">ಮೊದಲನೇಯ ಸಮುದಾಯದತ್ತ ಶಾಲಾ ಕಾರ್ಯಕ್ರಮ 2026-27</div>
+<div style="font-size:11pt;margin-top:1mm" contenteditable="true">ಮಾರ್ಗದರ್ಶಕರ ಭೇಟಿ ಸಮೀಕ್ಷೆ</div>
+</div>
+<table>
+<colgroup><col style="width:10mm"><col style="width:73mm"><col></colgroup>
+<tbody><tr><td class="num sub-num">1.</td><td contenteditable="true">ಶಾಲೆಯ ಹೆಸರು ಮತ್ತು ವಿಳಾಸ :</td><td contenteditable="true" class="answer"><br><br></td></tr>
+<tr><td class="num sub-num">2.</td><td contenteditable="true">ಕಾರ್ಯಕ್ರಮದ ದಿನಾಂಕ :</td><td contenteditable="true"><br><br><br></td></tr>
+<tr><td class="num sub-num">3.</td><td contenteditable="true">ಭಾಗವಹಿಸಿದ ಮಾರ್ಗದರ್ಶಕರ / ಅಧಿಕಾರಿಗಳ ಹೆಸರು ಮತ್ತು ಹುದ್ದೆ</td><td contenteditable="true" class="answer"><br><br><br></td></tr>
+<tr><td class="num sub-num">4.</td><td contenteditable="true">ಈ ಹಿಂದೆ ಭೇಟಿ ಸಮಯದಲ್ಲಿದ್ದ ಶಾಲಾ ಕಾರ್ಯಕ್ರಮಗಳ ಮೇಲ್ವಿಚಾರಣೆಯ ಮೇರೆಗೆ ಕೈಗೊಂಡ ಕ್ರಮ :</td><td contenteditable="true" class="answer" style="height:14mm"><br></td></tr>
+</tbody></table>
+<table class="compact" style="margin-top:1mm">
+<colgroup><col style="width:10mm"><col style="width:73mm"><col></colgroup>
+<tbody><tr><td class="num" rowspan="2">5.</td><td contenteditable="true" rowspan="2">ದಾಖಲಾತಿ ಮತ್ತು ಹಾಜರಾತಿ<br>
+1. ಜೂನ್ ತಿಂಗಳಿನಲ್ಲಿ B ಗ್ರೇಡ್ ನಲ್ಲಿದ್ದ ಮಕ್ಕಳ ವಿವರ ಸೆಪ್ಟಂಬರ್ ಅಂತ್ಯಕ್ಕೆ A ಗ್ರೇಡ್ ಸಾಧಿಸಿದ ಮಕ್ಕಳ ಮಾಹಿತಿ / ವಿವರ</td><td style="padding:0">
+<table class="compact students" style="margin:0">
+<tbody><tr><th contenteditable="true">ತರಗತಿ</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>ಒಟ್ಟು</th></tr>
+<tr class="count-total-row"><td contenteditable="true">ದಾಖಲಾತಿ</td><td contenteditable="true" class="count-input"><br></td><td contenteditable="true" class="count-input"><br></td><td contenteditable="true" class="count-input"><br></td><td contenteditable="true" class="count-input"><br></td><td contenteditable="true" class="count-input"><br></td><td contenteditable="true" class="count-input"><br></td><td contenteditable="true" class="count-input"><br></td><td contenteditable="true" class="count-input"></td><td class="auto-total">0</td></tr>
+<tr class="count-total-row"><td contenteditable="true">ಹಾಜರಾತಿ</td><td contenteditable="true" class="count-input"></td><td contenteditable="true" class="count-input"></td><td contenteditable="true" class="count-input"></td><td contenteditable="true" class="count-input"></td><td contenteditable="true" class="count-input"></td><td contenteditable="true" class="count-input"></td><td contenteditable="true" class="count-input"></td><td contenteditable="true" class="count-input"></td><td class="auto-total">0</td></tr>
+</tbody></table>
+</td></tr>
+<tr><td style="padding:0">
+<table class="compact students" style="margin:0">
+<tbody><tr><th contenteditable="true">ತರಗತಿ</th><th colspan="3" contenteditable="true">ಜೂನ್ ತಿಂಗಳಿನಲ್ಲಿ B ಗ್ರೇಡ್ ನಲ್ಲಿದ್ದ ಮಕ್ಕಳ ವಿವರ</th><th colspan="3" contenteditable="true">ಸೆಪ್ಟಂಬರ್ ಅಂತ್ಯಕ್ಕೆ A ಗ್ರೇಡ್ ಸಾಧಿಸಿದ ಮಕ್ಕಳ ಮಾಹಿತಿ / ವಿವರ</th></tr>
+<tr><th></th><th contenteditable="true">ಗಂಡು</th><th contenteditable="true">ಹೆಣ್ಣು</th><th contenteditable="true">ಒಟ್ಟು</th><th contenteditable="true">ಗಂಡು</th><th contenteditable="true">ಹೆಣ್ಣು</th><th contenteditable="true">ಒಟ್ಟು</th></tr>
+</tbody><tbody id="studentRows"><tr class="student-line"><td class="student-number">1</td><td contenteditable="true" class="b-male count-input"><br></td><td contenteditable="true" class="b-female count-input"><br></td><td class="b-total auto-total">0</td><td contenteditable="true" class="a-male count-input"><br></td><td contenteditable="true" class="a-female count-input"><br></td><td class="a-total auto-total">0</td></tr><tr class="student-line"><td class="student-number">2</td><td contenteditable="true" class="b-male count-input"><br></td><td contenteditable="true" class="b-female count-input"><br></td><td class="b-total auto-total">0</td><td contenteditable="true" class="a-male count-input"><br></td><td contenteditable="true" class="a-female count-input"><br></td><td class="a-total auto-total">0</td></tr><tr class="student-line"><td class="student-number">3</td><td contenteditable="true" class="b-male count-input"><br></td><td contenteditable="true" class="b-female count-input"><br></td><td class="b-total auto-total">0</td><td contenteditable="true" class="a-male count-input"><br></td><td contenteditable="true" class="a-female count-input"><br></td><td class="a-total auto-total">0</td></tr><tr class="student-line"><td class="student-number">4</td><td contenteditable="true" class="b-male count-input"><br></td><td contenteditable="true" class="b-female count-input"><br></td><td class="b-total auto-total">0</td><td contenteditable="true" class="a-male count-input"><br></td><td contenteditable="true" class="a-female count-input"><br></td><td class="a-total auto-total">0</td></tr><tr class="student-line"><td class="student-number">5</td><td contenteditable="true" class="b-male count-input"><br></td><td contenteditable="true" class="b-female count-input"><br></td><td class="b-total auto-total">0</td><td contenteditable="true" class="a-male count-input"><br></td><td contenteditable="true" class="a-female count-input"><br></td><td class="a-total auto-total">0</td></tr><tr class="student-line"><td class="student-number">6</td><td contenteditable="true" class="b-male count-input"><br></td><td contenteditable="true" class="b-female count-input"><br></td><td class="b-total auto-total">0</td><td contenteditable="true" class="a-male count-input"><br></td><td contenteditable="true" class="a-female count-input"><br></td><td class="a-total auto-total">0</td></tr><tr class="student-line"><td class="student-number">7</td><td contenteditable="true" class="b-male count-input"><br></td><td contenteditable="true" class="b-female count-input"><br></td><td class="b-total auto-total">0</td><td contenteditable="true" class="a-male count-input"><br></td><td contenteditable="true" class="a-female count-input"><br></td><td class="a-total auto-total">0</td></tr><tr class="student-line"><td class="student-number">8</td><td contenteditable="true" class="b-male count-input"></td><td contenteditable="true" class="b-female count-input"></td><td class="b-total auto-total">0</td><td contenteditable="true" class="a-male count-input"></td><td contenteditable="true" class="a-female count-input"></td><td class="a-total auto-total">0</td></tr></tbody>
+</table>
+</td></tr>
+</tbody></table>
+<table style="margin-top:1mm">
+<colgroup><col style="width:10mm"><col style="width:73mm"><col></colgroup>
+<tbody><tr><th colspan="3" class="section" contenteditable="true">6. ಶಾಲಾಭಿವೃದ್ಧಿ ಮತ್ತು ಮೇಲುಸ್ತುವಾರಿ ಸಮಿತಿಯ ಪಾತ್ರ</th></tr>
+<tr><td class="num sub-num">1.</td><td class="prompt" contenteditable="true"><br>ಸಮಿತಿ ಸದಸ್ಯರೆಲ್ಲರೂ ಭಾಗವಹಿಸಿದ್ದಾರೆಯೇ?<br><br><br></td><td contenteditable="true" class="answer"><br><br><br></td></tr>
+<tr><td class="num sub-num">2.</td><td contenteditable="true"><br>ಇಲ್ಲವಾದಲ್ಲಿ ಕಾರಣಗಳೇನು?<br><br></td><td contenteditable="true" class="answer">___&nbsp; &nbsp;&nbsp;</td></tr>
+<tr><td class="num sub-num">3.</td><td contenteditable="true">ಸಮಿತಿ ಸಭೆಯಲ್ಲಿ ಚರ್ಚೆಯಾದ ಮುಖ್ಯವಿಷಯಗಳು ಯಾವುವು?</td><td contenteditable="true" class="answer"><br><br><br></td></tr>
+<tr><td class="num sub-num">4.</td><td contenteditable="true"><br>ಸಮಿತಿ ಸಭೆಯಲ್ಲಿ ಪರಿಹಾರವಾದ ಸಮಸ್ಯೆಗಳು ಯಾವುವು?<br><br></td><td contenteditable="true" class="answer"><br><br><br><br><br></td></tr>
+<tr><th colspan="3" class="section" contenteditable="true">7. ಮಕ್ಕಳ ಪ್ರಗತಿ ಕುರಿತು ಪೋಷಕರೊಂದಿಗೆ ನಡೆಸಿದ ಸಮಾಲೋಚನೆ (ಸಿ.ಆರ್.ಸಿ ಆಧಾರಿತ)</th></tr>
+<tr><td class="num sub-num">1.</td><td contenteditable="true"><br><br>ಮಕ್ಕಳ&nbsp;&nbsp;ಪತ್ರ, ಉತ್ತರ ಪತ್ರಿಕೆ, ಹಾಗೂ ಮಕ್ಕಳ ವೈಯಕ್ತಿಕ ದಾಖಲೆ ಅಭ್ಯಾಸ ಪುಸ್ತಕ ಕೃತಿ ಸಂಪುಟ ಪೋಷಕರಿಗೆ ನೀಡಿ ಮಕ್ಕಳ ಪ್ರಗತಿ ಸಮಾಲೋಚಿಸಲಾಗಿದೆಯೇ?<br><br><br></td><td contenteditable="true" class="answer"><br><br><br></td></tr>
+<tr><td class="num sub-num">2.</td><td contenteditable="true"><br>ಉತ್ತರ ಪತ್ರಿಕೆ&nbsp; ಹಾಗೂ&nbsp;&nbsp;ವಿದ್ಯಾರ್ಥಿ ಕಲಿಕೆಯ ಬಗ್ಗೆ&nbsp; ಪೋಷಕರ ಅಭಿಪ್ರಾಯವೇನು?<br><br></td><td contenteditable="true" class="answer">.<br><br></td></tr>
+<tr><td class="num sub-num">3.</td><td contenteditable="true">ಈ ಮೇಲಿನ ದಾಖಲೆಗಳನ್ನು ಶಿಕ್ಷಕರು ಹೇಗೆ ನಿರ್ವಹಿಸುತ್ತಾರೆ?</td><td contenteditable="true" class="answer"><br><br><br><br><br></td></tr>
+</tbody></table>
+</section>
+
+<section class="paper page2" id="page2">
+<table>
+<colgroup><col style="width:10mm"><col style="width:73mm"><col></colgroup>
+<tbody><tr><th colspan="3" class="section" contenteditable="true"><br>8. ವಿದ್ಯಾರ್ಥಿಗಳ ಹಾಜರಾತಿ ಮಾಹಿತಿ<br><br></th></tr>
+<tr><td class="num sub-num">1.</td><td class="prompt" contenteditable="true">ಶಾಲೆಯಿಂದ ಹೊರಗುಳಿದ ಮಕ್ಕಳ ಸಂಖ್ಯೆ ಎಷ್ಟು?</td><td contenteditable="true" class="answer"><br></td></tr>
+<tr><td class="num sub-num">2.</td><td contenteditable="true">ಓ ಓ ಏಸ್ ಸಿ ಮಕ್ಕಳನ್ನು ಕಲಿಕಾ&nbsp; ಕೇಂದ್ರಕ್ಕೆ ಸೇರಿಸಲು ಮಾಡಿದ ವ್ಯವಸ್ಥೆ ಹಾಗೂ&nbsp; &nbsp;ಸೇರ್ಪಡೆ ಮಾಡಿದ ಮಕ್ಕಳ ಸಂಖ್ಯೆ ಎಷ್ಟು?</td><td contenteditable="true" class="answer"><br><br></td></tr>
+<tr><td class="num sub-num">3.</td><td contenteditable="true">ಶೇ.80% ರಷ್ಟು&nbsp; ಹಾಜರಾತಿ ಕಡಿಮೆಯಿರುವ&nbsp; ಮಕ್ಕಳ ಸಂಖ್ಯೆ ಎಷ್ಟು?</td><td contenteditable="true" class="answer"><br>-<br></td></tr>
+<tr><td class="num sub-num">4.</td><td contenteditable="true">ಗೈರು ಹಾಜರಿ ಕಡಿಮೆ ಮಾಡಲು ಯಾವ ಕ್ರಮಗಳನ್ನು ಕೈಗೊಳ್ಳಲಾಗಿದೆ?</td><td contenteditable="true" class="answer">.<br><br></td></tr>
+<tr><th colspan="3" class="section" contenteditable="true"><br>9. ಮಕ್ಕಳ ಕಲಿಕಾ ಪ್ರದರ್ಶನ ಕುರಿತು ಮಾಹಿತಿ<br><br></th></tr>
+<tr><td class="num sub-num">1.</td><td contenteditable="true">ಕಲಿಕಾ ಪ್ರದರ್ಶನದಲ್ಲಿ ನೀಡಿದ ಅಥವಾ ಮಕ್ಕಳೊಂದಿಗೆ ಸಂವಹಿಸಿದ ಕಾರ್ಯಕ್ರಮದ ವಿವರ.</td><td contenteditable="true" class="answer"><br><br></td></tr>
+<tr><td class="num sub-num">2.</td><td contenteditable="true">ಪಠ್ಯಕ್ರಮ ಆಧರಿಸಿ ರೂಪಿಸಿದ ಚಟುವಟಿಕೆಗಳ ವಿವರ.&nbsp;</td><td contenteditable="true" class="answer"><br><br></td></tr>
+<tr><th colspan="3" class="section" contenteditable="true"><br>10. ಸಹಪಠ್ಯ, ಚಟುವಟಿಕೆ ಮತ್ತು ಹತ್ತು&nbsp; ಅಂಶಗಳ ಕಾರ್ಯಕ್ರಮದ ವಿವರ<br><br></th></tr>
+<tr><td class="num sub-num">1.</td><td contenteditable="true">ಯಾವ ಯಾವ ಸಹಪಠ್ಯ ಚಟುವಟಿಕೆಗಳನ್ನು ಕೈಗೊಂಡಿದ್ದಾರೆ ?</td><td contenteditable="true" class="answer">.<br><br><br><br></td></tr>
+<tr><td class="num sub-num">2.</td><td contenteditable="true">ಶಾಲೆಯಲ್ಲಿ ಗ್ರಂಥಾಲಯ ನಿರ್ವಹಣೆ ಹೇಗಿದೆ?</td><td contenteditable="true" class="answer"><br><br><br><br></td></tr>
+<tr><td class="num sub-num">3.</td><td contenteditable="true">ಮಕ್ಕಳು ತಯಾರಿಸಿರುವ ಯೋಜನೆಗಳನ್ನು ತರಗತಿಯಲ್ಲಿ ಪ್ರದರ್ಶಿಸಲಾಗಿದೆಯೇ?</td><td contenteditable="true" class="answer"><br><br><br></td></tr>
+<tr><td class="num sub-num">4.</td><td contenteditable="true">ಶಾಲಾ ಸಂಸತ್ತು ರಚನೆ ಮಾಡಲಾಗಿದೆಯೇ? ಅದರ ನಿರ್ವಹಣೆ ಹೇಗಿದೆ?</td><td contenteditable="true" class="answer"><br><br><br></td></tr>
+<tr><td class="num sub-num">5.</td><td contenteditable="true">ಪಡೇ ಭಾರತ್ ಬಢೇ ಭಾರತ ಕಾರ್ಯಕ್ರಮದ ಅನುಷ್ಠಾನದ ಬಗ್ಗೆ ಅಭಿಪ್ರಾಯವೇನು?</td><td contenteditable="true" class="answer"><br><br></td></tr>
+<tr><th colspan="3" class="section" contenteditable="true"><br>11. ನಲಿ-ಕಲಿ&nbsp; ಪ್ರಗತಿ ವಿವರ<br><br></th></tr>
+<tr><td class="num sub-num">1.</td><td contenteditable="true">ನಲಿ-ಕಲಿ&nbsp; ತರಗತಿ ಕೋಣೆ ಮತ್ತು ತರಗತಿ ಪರಿಸರದ ಬಗ್ಗೆ ಅಭಿಪ್ರಾಯ</td><td contenteditable="true" class="answer"><br><br><br></td></tr>
+<tr><td class="num sub-num">2.</td><td contenteditable="true">ನಲಿ-ಕಲಿ ದಾಖಲೆಗಳನ್ನು ನಿರ್ವಹಿಸಲಾಗಿದೆಯೇ?</td><td contenteditable="true" class="answer"><br><br><br></td></tr>
+<tr><td class="num sub-num">3.</td><td contenteditable="true">ನಲಿ-ಕಲಿ ಮಕ್ಕಳಿಗೆ ಮೌಲ್ಯಮಾಪನ ಮಾಡಲಾಗಿದೆಯೇ?</td><td contenteditable="true" class="answer"><br><br><br><br></td></tr>
+<tr><th colspan="3" class="section" contenteditable="true"><br>12. ಶಾಲಾ ದಾಖಲಾತಿಗಳ ನಿರ್ವಹಣೆ<br><br></th></tr>
+<tr><td class="num sub-num">1.</td><td contenteditable="true">ಮುಖ್ಯ ಶಿಕ್ಷಕರು ಕ್ರೂಢೀಕೃತ ಅಂಕ ವಹಿ ನಿರ್ವಹಿಸಿದ್ದಾರೆಯೇ?</td><td contenteditable="true" class="answer"><br></td></tr>
+<tr><td class="num sub-num">2.</td><td contenteditable="true">ಪ್ರಗತಿ ಪತ್ರ ತುಂಬಿ ಪೋಷಕರಿಗೆ ನೀಡಿ ಚರ್ಚಿಸಲಾಗಿದೆಯೇ?</td><td contenteditable="true" class="answer"><br><br><br></td></tr>
+<tr><td class="num sub-num">3.</td><td contenteditable="true">ಏನಾದರೂ ವಿಶೇಷತೆ ಇದ್ದಲ್ಲಿ ವಿವರ ನೀಡಿ.</td><td contenteditable="true" class="answer" style="height:14mm"><br><br></td></tr>
+</tbody></table>
+<div class="signature"><span contenteditable="true">ಮುಖ್ಯ ಗುರುಗಳ ಸಹಿ</span><span contenteditable="true">ಮಾರ್ಗದರ್ಶಕರ ಸಹಿ</span></div>
+</section>
+
+
+
+<script>
+function setFormFontSize(value){
+  document.documentElement.style.setProperty('--form-font-size', value+'pt');
+  const label=document.getElementById('fontSizeValue');
+  if(label) label.textContent=value+' pt';
+}
+function numFromCell(cell){
+  return parseFloat((cell?.innerText || cell?.textContent || '').trim().replace(/,/g,'')) || 0;
+}
+function updateStudentTotals(){
+  document.querySelectorAll('.count-total-row').forEach(row=>{
+    const inputs=[...row.querySelectorAll('.count-input')];
+    const total=inputs.reduce((sum,cell)=>sum+numFromCell(cell),0);
+    const output=row.querySelector('.auto-total');
+    if(output) output.textContent=total;
+  });
+  document.querySelectorAll('#studentRows .student-line').forEach(row=>{
+    const b=row.querySelector('.b-total');
+    const a=row.querySelector('.a-total');
+    if(b) b.textContent=numFromCell(row.querySelector('.b-male'))+numFromCell(row.querySelector('.b-female'));
+    if(a) a.textContent=numFromCell(row.querySelector('.a-male'))+numFromCell(row.querySelector('.a-female'));
+  });
+}
+function downloadHTML(){
+  const clone=document.documentElement.cloneNode(true);
+  const blob=new Blob(['<!DOCTYPE html>\n'+clone.outerHTML],{type:'text/html;charset=utf-8'});
+  const link=document.createElement('a');
+  link.href=URL.createObjectURL(blob); link.download='index.html'; link.click();
+  setTimeout(()=>URL.revokeObjectURL(link.href),1000);
+}
+document.addEventListener('input',e=>{
+  if(e.target.matches('.count-input')) updateStudentTotals();
+});
+document.addEventListener('focusout',e=>{
+  if(e.target.matches('.count-input')) updateStudentTotals();
+});
+window.addEventListener('beforeprint',updateStudentTotals);
+document.addEventListener('DOMContentLoaded',updateStudentTotals);
+updateStudentTotals();
+</script>
+</body></html>
